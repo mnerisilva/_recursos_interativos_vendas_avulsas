@@ -2,6 +2,10 @@ let input_altura = document.querySelector('#altura');
 let input_peso   = document.querySelector('#peso');
 const calcular = document.querySelector('.calcular');
 const resultado = document.querySelector('.resultado');
+const bt_enviar_texto = document.querySelector('.bt-enviar-texto');
+const textarea_normaliza = document.querySelector('#normaliza-texto');
+const resultado_normalizacao = document.querySelector('.resultado-normalizacao p');
+
 
 let imc = 0;
 let altura = 0;
@@ -28,6 +32,12 @@ calcular.addEventListener('click', function(event){
     }
 });
 
+bt_enviar_texto.addEventListener('click' , function(){
+    console.log('clicou botão enviar');
+    let texto_textarea = textarea_normaliza.value;
+    resultado_normalizacao.textContent = normalizaTexto(texto_textarea);
+})
+
 function preparaValor(valor){
     valor = parseFloat(valor);
     return valor.toFixed(2);
@@ -40,14 +50,16 @@ function preparaValor(valor){
 function normalizaTexto(texto){
 
     let t_final = '';
-    t_final = texto;
-    t_final = t_final.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-    t_final = t_final.replaceAll(',','').trim();
-    t_final = t_final.replaceAll(' ','_').trim();
-    t_final = t_final.replaceAll(':','_').trim();
+    t_final = texto;   
+    t_final = t_final.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z\s])/g, '')
+    //t_final = t_final.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    //t_final = t_final.replaceAll(',','').trim();
+    //t_final = t_final.replaceAll(' ','_').trim();
+    //t_final = t_final.replaceAll(':','_').trim();
+    t_final = t_final.trim();
+    t_final = t_final.replaceAll(' ','_');
     t_final = t_final.toLowerCase();
     return t_final;
 
 }
 
-console.log(normalizaTexto('Analfabetos de hoje são os discípulos de Paulo Freire, que não aprenderam a ler o mundo e a conhecer a realidade: Uma resposta a Leandro Karnal  '));
