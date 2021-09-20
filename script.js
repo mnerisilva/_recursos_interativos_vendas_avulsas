@@ -32,3 +32,22 @@ function preparaValor(valor){
     valor = parseFloat(valor);
     return valor.toFixed(2);
 }
+
+
+
+
+
+function normalizaTexto(texto){
+
+    let t_final = '';
+    t_final = texto;
+    t_final = t_final.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    t_final = t_final.replaceAll(',','').trim();
+    t_final = t_final.replaceAll(' ','_').trim();
+    t_final = t_final.replaceAll(':','_').trim();
+    t_final = t_final.toLowerCase();
+    return t_final;
+
+}
+
+console.log(normalizaTexto('Analfabetos de hoje são os discípulos de Paulo Freire, que não aprenderam a ler o mundo e a conhecer a realidade: Uma resposta a Leandro Karnal  '));
