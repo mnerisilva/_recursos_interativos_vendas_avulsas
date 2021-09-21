@@ -3,6 +3,7 @@ let input_peso   = document.querySelector('#peso');
 const calcular = document.querySelector('.calcular');
 const resultado = document.querySelector('.resultado');
 const bt_enviar_texto = document.querySelector('.bt-enviar-texto');
+const bt_limpar = document.querySelector('.bt-limpar');
 const textarea_normaliza = document.querySelector('#normaliza-texto');
 const resultado_normalizacao = document.querySelector('.resultado-normalizacao p');
 
@@ -36,6 +37,12 @@ bt_enviar_texto.addEventListener('click' , function(){
     console.log('clicou botão enviar');
     let texto_textarea = textarea_normaliza.value;
     resultado_normalizacao.textContent = normalizaTexto(texto_textarea);
+})
+
+bt_limpar.addEventListener('click' , function(){
+    console.log('clicou botão enviar');
+    textarea_normaliza.value = '';
+    resultado_normalizacao.textContent = '';
 })
 
 function preparaValor(valor){
