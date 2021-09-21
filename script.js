@@ -6,6 +6,12 @@ const bt_enviar_texto = document.querySelector('.bt-enviar-texto');
 const bt_limpar = document.querySelector('.bt-limpar');
 const textarea_normaliza = document.querySelector('#normaliza-texto');
 const resultado_normalizacao = document.querySelector('.resultado-normalizacao p');
+let inputElement = document.querySelector('#texto');
+let invertido = document.querySelector('.invertido');
+let texto = '';
+console.log(texto);
+let bt_enviar = document.querySelector('.bt-enviar');
+let arr = [];
 
 
 let imc = 0;
@@ -69,4 +75,21 @@ function normalizaTexto(texto){
     return t_final;
 
 }
+
+
+bt_enviar.addEventListener('click', function(){
+    texto = inputElement.value;
+    console.log('entrou aqui ' + texto);
+    if(texto.length > 0){
+        console.log('depois aqui');
+        texto = texto.split('');
+        texto.map(elemento => arr.unshift(elemento));
+        texto = arr.toString();
+        texto = texto.replaceAll(',','');
+        console.log(texto);
+        invertido.textContent = texto;
+    } else {
+        alert('Preencha o campo texto!');
+    }
+});
 
